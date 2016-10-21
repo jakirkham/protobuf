@@ -460,7 +460,7 @@ void FieldMaskTree::TrimMessage(const Node* node, Message* message) {
       reflection->ClearField(message, field);
     } else {
       if (field->cpp_type() == FieldDescriptor::CPPTYPE_MESSAGE) {
-        Node* child = node->children.at(field->name());
+        Node* child = node->children.find(field->name())->second;
         if (!child->children.empty()) {
           TrimMessage(child, reflection->MutableMessage(message, field));
         }
