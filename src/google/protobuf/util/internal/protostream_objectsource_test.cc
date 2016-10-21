@@ -51,6 +51,7 @@
 #include <google/protobuf/util/internal/testdata/maps.pb.h>
 #include <google/protobuf/util/internal/testdata/struct.pb.h>
 #include <google/protobuf/util/internal/testdata/timestamp_duration.pb.h>
+#include <google/protobuf/util/time_util.h>
 #include <gtest/gtest.h>
 
 
@@ -961,7 +962,7 @@ TEST_P(ProtostreamObjectSourceTimestampTest, InvalidTimestampBelowMinTest) {
   TimestampDuration out;
   google::protobuf::Timestamp* ts = out.mutable_ts();
   // Min allowed seconds - 1
-  ts->set_seconds(kTimestampMinSeconds - 1);
+  ts->set_seconds(util::TimeUtil::kTimestampMinSeconds - 1);
   ow_.StartObject("");
 
   Status status = ExecuteTest(out, TimestampDuration::descriptor());
@@ -972,7 +973,7 @@ TEST_P(ProtostreamObjectSourceTimestampTest, InvalidTimestampAboveMaxTest) {
   TimestampDuration out;
   google::protobuf::Timestamp* ts = out.mutable_ts();
   // Max allowed seconds + 1
-  ts->set_seconds(kTimestampMaxSeconds + 1);
+  ts->set_seconds(util::TimeUtil::kTimestampMaxSeconds + 1);
   ow_.StartObject("");
 
   Status status = ExecuteTest(out, TimestampDuration::descriptor());
@@ -983,7 +984,7 @@ TEST_P(ProtostreamObjectSourceTimestampTest, InvalidDurationBelowMinTest) {
   TimestampDuration out;
   google::protobuf::Duration* dur = out.mutable_dur();
   // Min allowed seconds - 1
-  dur->set_seconds(kDurationMinSeconds - 1);
+  dur->set_seconds(util::TimeUtil::kDurationMinSeconds - 1);
   ow_.StartObject("");
 
   Status status = ExecuteTest(out, TimestampDuration::descriptor());
@@ -994,7 +995,7 @@ TEST_P(ProtostreamObjectSourceTimestampTest, InvalidDurationAboveMaxTest) {
   TimestampDuration out;
   google::protobuf::Duration* dur = out.mutable_dur();
   // Min allowed seconds + 1
-  dur->set_seconds(kDurationMaxSeconds + 1);
+  dur->set_seconds(util::TimeUtil::kDurationMaxSeconds + 1);
   ow_.StartObject("");
 
   Status status = ExecuteTest(out, TimestampDuration::descriptor());

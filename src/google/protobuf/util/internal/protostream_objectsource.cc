@@ -45,6 +45,7 @@
 #include <google/protobuf/util/internal/field_mask_utility.h>
 #include <google/protobuf/util/internal/constants.h>
 #include <google/protobuf/util/internal/utility.h>
+#include <google/protobuf/util/time_util.h>
 #include <google/protobuf/stubs/strutil.h>
 #include <google/protobuf/stubs/map_util.h>
 #include <google/protobuf/stubs/status_macros.h>
@@ -319,7 +320,7 @@ Status ProtoStreamObjectSource::RenderTimestamp(
   pair<int64, int32> p = os->ReadSecondsAndNanos(type);
   int64 seconds = p.first;
   int32 nanos = p.second;
-  if (seconds > kTimestampMaxSeconds || seconds < kTimestampMinSeconds) {
+  if (seconds > util::TimeUtil::kTimestampMaxSeconds || seconds < util::TimeUtil::kTimestampMinSeconds) {
     return Status(
         util::error::INTERNAL,
         StrCat("Timestamp seconds exceeds limit for field: ", field_name));
@@ -343,7 +344,7 @@ Status ProtoStreamObjectSource::RenderDuration(
   pair<int64, int32> p = os->ReadSecondsAndNanos(type);
   int64 seconds = p.first;
   int32 nanos = p.second;
-  if (seconds > kDurationMaxSeconds || seconds < kDurationMinSeconds) {
+  if (seconds > util::TimeUtil::kDurationMaxSeconds || seconds < util::TimeUtil::kDurationMinSeconds) {
     return Status(
         util::error::INTERNAL,
         StrCat("Duration seconds exceeds limit for field: ", field_name));

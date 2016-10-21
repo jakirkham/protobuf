@@ -40,6 +40,7 @@
 #include <google/protobuf/util/internal/object_location_tracker.h>
 #include <google/protobuf/util/internal/constants.h>
 #include <google/protobuf/util/internal/utility.h>
+#include <google/protobuf/util/time_util.h>
 #include <google/protobuf/stubs/strutil.h>
 #include <google/protobuf/stubs/map_util.h>
 #include <google/protobuf/stubs/statusor.h>
@@ -950,7 +951,7 @@ Status ProtoStreamObjectWriter::RenderDuration(ProtoStreamObjectWriter* ow,
   nanos = sign * nanos;
 
   int64 seconds = sign * unsigned_seconds;
-  if (seconds > kDurationMaxSeconds || seconds < kDurationMinSeconds ||
+  if (seconds > util::TimeUtil::kDurationMaxSeconds || seconds < util::TimeUtil::kDurationMinSeconds ||
       nanos <= -kNanosPerSecond || nanos >= kNanosPerSecond) {
     return Status(INVALID_ARGUMENT, "Duration value exceeds limits");
   }
