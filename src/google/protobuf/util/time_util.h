@@ -55,11 +55,11 @@ class LIBPROTOBUF_EXPORT TimeUtil {
   // The min/max Timestamp/Duration values we support.
   //
   // For "0001-01-01T00:00:00Z".
-  static const int64 kTimestampMinSeconds = -62135596800LL;
+  static const int64 kTimestampMinSeconds;
   // For "9999-12-31T23:59:59.999999999Z".
-  static const int64 kTimestampMaxSeconds = 253402300799LL;
-  static const int64 kDurationMinSeconds = -315576000000LL;
-  static const int64 kDurationMaxSeconds = 315576000000LL;
+  static const int64 kTimestampMaxSeconds;
+  static const int64 kDurationMinSeconds;
+  static const int64 kDurationMaxSeconds;
 
   // Converts Timestamp to/from RFC 3339 date string format.
   // Generated output will always be Z-normalized and uses 3, 6 or 9

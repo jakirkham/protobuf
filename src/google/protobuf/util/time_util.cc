@@ -44,6 +44,15 @@ namespace util {
 using google::protobuf::Timestamp;
 using google::protobuf::Duration;
 
+// The min/max Timestamp/Duration values we support.
+//
+// For "0001-01-01T00:00:00Z".
+const int64 TimeUtil::kTimestampMinSeconds = -62135596800LL;
+// For "9999-12-31T23:59:59.999999999Z".
+const int64 TimeUtil::kTimestampMaxSeconds = 253402300799LL;
+const int64 TimeUtil::kDurationMinSeconds = -315576000000LL;
+const int64 TimeUtil::kDurationMaxSeconds = 315576000000LL;
+
 namespace {
 static const int kNanosPerSecond = 1000000000;
 static const int kMicrosPerSecond = 1000000;
@@ -141,13 +150,6 @@ int64 RoundTowardZero(int64 value, int64 divider) {
   }
 }
 }  // namespace
-
-// Actually define these static const integers. Required by C++ standard (but
-// omitting them may still work with some compilers).
-const int64 TimeUtil::kTimestampMinSeconds;
-const int64 TimeUtil::kTimestampMaxSeconds;
-const int64 TimeUtil::kDurationMaxSeconds;
-const int64 TimeUtil::kDurationMinSeconds;
 
 string TimeUtil::ToString(const Timestamp& timestamp) {
   return FormatTime(timestamp.seconds(), timestamp.nanos());
