@@ -121,7 +121,7 @@ void File::WriteStringToFileOrDie(const string& contents, const string& name) {
 
 bool File::CreateDir(const string& name, int mode) {
   if (!name.empty()) {
-    GOOGLE_CHECK_OK(name.back() != '.');
+    GOOGLE_CHECK_OK(*(name.rbegin()) != '.');
   }
   return mkdir(name.c_str(), mode) == 0;
 }
